@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Turks.pk - 2030 Turks Population Projection in Pakistan</title>
+    <meta name="description" content="Interactive 3D visualization of Turks population projections across Pakistan's regions for 2030">
+    <meta property="og:title" content="Turks.pk - Turks Population Projection 2030">
+    <meta property="og:description" content="Explore demographic trends of Turks communities in Pakistan">
+    <meta property="og:type" content="website">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="fixed inset-0 bg-white z-50 flex items-center justify-center transition-opacity duration-300">
+      <div class="text-center">
+        <div class="loading-spinner w-12 h-12 border-4 border-brand-teal border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+        <p class="text-brand-dark font-medium">Loading 3D Visualization...</p>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="hero-gradient text-white sticky top-0 z-40 shadow-xl">
+      <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-3">
+        <div
+          class="flex flex-col sm:flex-row justify-between items-center gap-2"
+        >
+          <div class="flex items-center justify-between w-full sm:w-auto">
+            <div class="flex items-center space-x-2 sm:space-x-3">
+              <div class="bg-white p-1 sm:p-2 rounded-full glow" aria-hidden="true">
+                <!-- SVG Logo Container -->
+                <div class="w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center">
+                  <img 
+                    src="./logo.png" 
+                    alt="Turks.pk Logo" 
+                    class="w-full h-full object-contain"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                  >
+                  <!-- Fallback in case SVG fails to load -->
+                  <div class="hidden text-brand-red font-bold text-xs sm:text-sm">
+                    TPK
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h1 class="text-xl sm:text-2xl md:text-3xl font-bold">
+                  Turks.pk
+                </h1>
+                <p class="text-xs sm:text-sm opacity-80">
+                  Turks Population - 2030 Projection
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="header-stats flex justify-center sm:justify-end w-full sm:w-auto mt-2 sm:mt-0"
+          >
+            <div
+              class="bg-white/20 backdrop-blur-sm rounded-lg px-3 py-1 sm:px-4 sm:py-2 text-center min-w-[110px] sm:min-w-[120px]"
+            >
+              <p class="text-xs uppercase tracking-wider">Total Projected</p>
+              <p
+                id="total-population-header"
+                class="text-base sm:text-lg md:text-xl font-bold"
+              >
+                318,000
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+      <!-- Hero Section -->
+      <section class="py-6 sm:py-8 md:py-12 hero-gradient text-white">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
+          <div class="text-center max-w-3xl mx-auto fade-in">
+            <h1
+              class="hero-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4"
+            >
+              Turks Population Projection 2030
+            </h1>
+            <p
+              class="hero-subtitle text-base sm:text-lg md:text-xl opacity-90 mb-6 sm:mb-8"
+            >
+              Exploring the demographic trends and distribution of Turks
+              communities across Pakistan's regions and divisions
+            </p>
+            <div
+              class="hero-stats grid grid-cols-2 sm:flex justify-center gap-2 sm:gap-3 md:gap-4"
+            >
+              <div
+                class="bg-white/20 backdrop-blur-sm rounded-lg px-3 py-2 sm:px-4 sm:py-3 text-center"
+              >
+                <p class="text-xs sm:text-sm">Total Population</p>
+                <p
+                  class="text-base sm:text-lg md:text-xl font-bold"
+                  id="hero-total"
+                >
+                  318,000
+                </p>
+              </div>
+              <div
+                class="bg-white/20 backdrop-blur-sm rounded-lg px-3 py-2 sm:px-4 sm:py-3 text-center"
+              >
+                <p class="text-xs sm:text-sm">Regions Covered</p>
+                <p class="text-base sm:text-lg md:text-xl font-bold">7</p>
+              </div>
+              <div
+                class="bg-white/20 backdrop-blur-sm rounded-lg px-3 py-2 sm:px-4 sm:py-3 text-center"
+              >
+                <p class="text-xs sm:text-sm">Divisions</p>
+                <p class="text-base sm:text-lg md:text-xl font-bold">28</p>
+              </div>
+              <div
+                class="bg-white/20 backdrop-blur-sm rounded-lg px-3 py-2 sm:px-4 sm:py-3 text-center"
+              >
+                <p class="text-xs sm:text-sm">Growth Rate</p>
+                <p class="text-base sm:text-lg md:text-xl font-bold">2.8%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Visualization Section -->
+      <section class="py-6 sm:py-8 md:py-12">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
+          <div
+            class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 items-start"
+          >
+            <!-- 3D Map Container -->
+            <div class="lg:col-span-2">
+              <div
+                class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden mb-4 sm:mb-6"
+              >
+                <div class="p-3 sm:p-4 md:p-6 border-b border-gray-200">
+                  <h2
+                    class="text-lg sm:text-xl md:text-2xl font-bold flex items-center"
+                  >
+                    <i
+                      class="fas fa-globe-asia text-brand-teal mr-2 sm:mr-3"
+                      aria-hidden="true"
+                    ></i>
+                    Interactive 3D Population Map
+                  </h2>
+                  <p class="text-gray-600 mt-1 sm:mt-2 text-sm sm:text-base">
+                    Click or tap on regions to explore detailed population data
+                  </p>
+                </div>
+                <div
+                  id="map-container"
+                  class="map-container w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] xl:h-[450px] rounded-b-2xl overflow-hidden relative"
+                  role="application"
+                  aria-label="3D Population Map"
+                >
+                  <div id="map-error" class="error-state hidden absolute inset-0 z-10 flex flex-col items-center justify-center bg-white">
+                    <i class="fas fa-exclamation-triangle text-4xl text-red-500 mb-4" aria-hidden="true"></i>
+                    <p class="text-center text-gray-700 px-4">Unable to load 3D map.<br>Please check your browser support for WebGL.</p>
+                    <button id="retry-map" class="mt-4 px-4 py-2 bg-brand-teal text-white rounded-lg hover:bg-brand-dark transition-colors">
+                      Retry Loading Map
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Region Cards -->
+              <div
+                class="region-cards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-3 sm:gap-4 stagger-animation"
+                id="region-cards-container"
+                role="list"
+                aria-label="Region population cards"
+              >
+                <!-- Region cards will be populated by JavaScript -->
+              </div>
+            </div>
+
+            <!-- Sidebar with Stats and Details -->
+            <div class="space-y-4 sm:space-y-6 md:space-y-8">
+              <!-- Population Stats -->
+              <div
+                class="card-gradient backdrop-blur-lg rounded-2xl shadow-xl p-3 sm:p-4 md:p-6"
+              >
+                <h2
+                  class="text-lg sm:text-xl md:text-2xl font-bold mb-4 sm:mb-6 flex items-center"
+                >
+                  <i class="fas fa-chart-bar text-brand-teal mr-2 sm:mr-3" aria-hidden="true"></i>
+                  Population Statistics
+                </h2>
+
+                <div
+                  class="text-center mb-4 sm:mb-6 p-3 sm:p-4 bg-white rounded-xl shadow-inner"
+                >
+                  <p
+                    id="total-population"
+                    class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-brand-red mb-1 sm:mb-2"
+                  >
+                    318,000
+                  </p>
+                  <p class="text-xs sm:text-sm text-gray-600">
+                    Total Turks Population (2030 Projection)
+                  </p>
+                </div>
+
+                <div class="population-chart-container w-full h-48 sm:h-64 md:h-72 relative">
+                  <div id="chart-loading" class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 hidden">
+                    <div class="loading-spinner w-8 h-8 border-2 border-brand-teal border-t-transparent rounded-full animate-spin"></div>
+                  </div>
+                  <canvas id="population-chart" aria-label="Population distribution chart" role="img"></canvas>
+                </div>
+              </div>
+
+              <!-- Region Details -->
+              <div
+                id="details-container"
+                class="card-gradient backdrop-blur-lg rounded-2xl shadow-xl p-3 sm:p-4 md:p-6"
+              >
+                <div class="flex mb-3 sm:mb-4 border-b border-gray-200" role="tablist" aria-label="Region data tabs">
+                  <button
+                    id="region-tab"
+                    class="tab-button flex-1 py-2 sm:py-3 px-3 sm:px-4 font-medium rounded-t-lg active text-sm sm:text-base"
+                    role="tab"
+                    aria-selected="true"
+                    aria-controls="region-details-content"
+                    data-tab="region"
+                  >
+                    <i class="fas fa-info-circle mr-2" aria-hidden="true"></i>
+                    Region Data
+                  </button>
+                  <button
+                    id="division-tab"
+                    class="tab-button flex-1 py-2 sm:py-3 px-3 sm:px-4 font-medium rounded-t-lg text-sm sm:text-base"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="division-details-content"
+                    data-tab="division"
+                  >
+                    <i class="fas fa-map mr-2" aria-hidden="true"></i>
+                    Division Data
+                  </button>
+                </div>
+
+                <div id="region-details-content" role="tabpanel" aria-labelledby="region-tab">
+                  <!-- Content populated by JavaScript -->
+                </div>
+
+                <div id="division-details-content" class="hidden" role="tabpanel" aria-labelledby="division-tab">
+                  <!-- Content populated by JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Additional Info Section -->
+      <section class="py-6 sm:py-8 md:py-12 bg-white/50">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
+          <div class="text-center mb-6 sm:mb-8 md:mb-12">
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4">
+              Demographic Insights
+            </h2>
+            <p class="text-gray-700 text-sm sm:text-base max-w-3xl mx-auto">
+              Understanding the distribution and growth patterns of Turks
+              communities across Pakistan's diverse regions and divisions
+            </p>
+          </div>
+
+          <div
+            class="info-cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
+            role="list"
+          >
+            <div
+              class="bg-white rounded-2xl shadow-lg p-4 sm:p-5 md:p-6 text-center hover:shadow-xl transition-shadow"
+              role="listitem"
+            >
+              <div
+                class="bg-red-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4"
+                aria-hidden="true"
+              >
+                <i
+                  class="fas fa-users text-red-600 text-lg sm:text-xl md:text-2xl"
+                ></i>
+              </div>
+              <h3 class="text-lg sm:text-xl font-bold mb-2">
+                Population Distribution
+              </h3>
+              <p class="text-gray-700 text-sm sm:text-base">
+                Turks communities are primarily concentrated in urban centers
+                with established trade and cultural connections.
+              </p>
+            </div>
+
+            <div
+              class="bg-white rounded-2xl shadow-lg p-4 sm:p-5 md:p-6 text-center hover:shadow-xl transition-shadow"
+              role="listitem"
+            >
+              <div
+                class="bg-blue-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4"
+                aria-hidden="true"
+              >
+                <i
+                  class="fas fa-chart-line text-blue-600 text-lg sm:text-xl md:text-2xl"
+                ></i>
+              </div>
+              <h3 class="text-lg sm:text-xl font-bold mb-2">Growth Trends</h3>
+              <p class="text-gray-700 text-sm sm:text-base">
+                Steady growth observed across all regions, with highest
+                increases in economic hubs and capital areas.
+              </p>
+            </div>
+
+            <div
+              class="bg-white rounded-2xl shadow-lg p-4 sm:p-5 md:p-6 text-center hover:shadow-xl transition-shadow"
+              role="listitem"
+            >
+              <div
+                class="bg-green-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4"
+                aria-hidden="true"
+              >
+                <i
+                  class="fas fa-handshake text-green-600 text-lg sm:text-xl md:text-2xl"
+                ></i>
+              </div>
+              <h3 class="text-lg sm:text-xl font-bold mb-2">
+                Cultural Integration
+              </h3>
+              <p class="text-gray-700 text-sm sm:text-base">
+                Strong cultural preservation alongside integration into local
+                communities characterizes these populations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="bg-gradient-to-b from-gray-800 to-gray-900 text-gray-300 py-6 sm:py-8 md:py-12"
+    >
+      <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
+        <div
+          class="footer-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+        >
+          <!-- Brand Section -->
+          <div class="space-y-3 sm:space-y-4 text-center md:text-left">
+            <div
+              class="flex items-center space-x-2 sm:space-x-3 justify-center md:justify-start"
+            >
+              <div class="bg-white p-1 sm:p-2 rounded-full" aria-hidden="true">
+                <!-- Footer Logo -->
+                <div class="w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center">
+                  <img 
+                    src="./logo.png" 
+                    alt="Turks.pk Logo" 
+                    class="w-full h-full object-contain"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                  >
+                  <!-- Fallback in case SVG fails to load -->
+                  <div class="hidden text-brand-red font-bold text-xs sm:text-sm">
+                    TPK
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-lg sm:text-xl font-bold text-white">
+                  Turks.pk
+                </h3>
+                
+                
+              </div>
+            </div>
+            <p class="text-gray-400 text-sm max-w-xs mx-auto md:mx-0">
+              A comprehensive research platform exploring Turks demographic
+              trends and projections in Pakistan.
+            </p>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="text-center md:text-left">
+            <h4
+              class="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4"
+            >
+              Quick Links
+            </h4>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#"
+                  class="hover:text-white transition-colors text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded px-1"
+                  >About the Project</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="hover:text-white transition-colors text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded px-1"
+                  >3D Population Map</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="hover:text-white transition-colors text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded px-1"
+                  >Region Data</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="hover:text-white transition-colors text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded px-1"
+                  >Division Data</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact & Social -->
+          <div class="text-center md:text-left">
+            <h4
+              class="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4"
+            >
+              Connect With Us
+            </h4>
+            <div
+              class="flex justify-center md:justify-start space-x-3 sm:space-x-4 mb-4 sm:mb-6"
+            >
+              <a
+                href="https://whatsapp.com/channel/0029VbBol461CYoN0zTFnd04"
+                class="bg-gray-700 hover:bg-gray-600 text-white p-2 sm:p-3 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                aria-label="WhatsApp"
+              >
+                <i class="fab fa-whatsapp text-sm sm:text-base"></i>
+              </a>
+              <a
+                href="https://facebook.com/groups/822767336973434/?mibextid=rS40aB7S9Ucbxw6v"
+                class="bg-gray-700 hover:bg-gray-600 text-white p-2 sm:p-3 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                aria-label="Facebook"
+              >
+                <i class="fab fa-facebook-f text-sm sm:text-base"></i>
+              </a>
+            </div>
+            <div class="space-y-1 sm:space-y-2 text-xs sm:text-sm">
+              <p class="flex items-center justify-center md:justify-start">
+                <i class="fas fa-envelope mr-2 text-brand-accent" aria-hidden="true"></i>
+                info@turks.pk
+              </p>
+              <p class="flex items-center justify-center md:justify-start">
+                <i class="fas fa-map-marker-alt mr-2 text-brand-accent" aria-hidden="true"></i>
+                Islamabad, Pakistan
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-gray-700 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center text-xs sm:text-sm text-gray-400"
+        >
+          <p>
+            &copy; 2024 Turks.pk - All Rights Reserved | Demographic Data
+            Projection for Research Purposes
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script
+      async
+      src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"
+    ></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+        }
+      }
+    </script>
+    <script type="module" src="script.js" defer></script>
+  </body>
+</html>
