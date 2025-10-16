@@ -13,7 +13,7 @@ const regionData = {
     color: "#EF4444",
     position: [2, 0, 0],
     scale: 1.2,
-    description: "The most populous province, with a significant Turkic community in its urban centers.",
+    description: "The most populous province, with a significant Turks community in its urban centers.",
     divisions: [
       { name: "Lahore", population: 45000, growth: 3.2 },
       { name: "Faisalabad", population: 25000, growth: 2.8 },
@@ -30,7 +30,7 @@ const regionData = {
     color: "#3B82F6",
     position: [-1, 0, -1],
     scale: 1.1,
-    description: "Home to a diverse population, including a notable Turkic presence in Karachi and other major cities.",
+    description: "Home to a diverse population, including a notable Turks presence in Karachi and other major cities.",
     divisions: [
       { name: "Karachi", population: 55000, growth: 3.5 },
       { name: "Hyderabad", population: 12000, growth: 2.4 },
@@ -45,7 +45,7 @@ const regionData = {
     color: "#10B981",
     position: [-2, 0, 1],
     scale: 0.9,
-    description: "A province with deep historical and cultural ties to Central Asia, reflected in its Turkic population.",
+    description: "A province with deep historical and cultural ties to Central Asia, reflected in its Turks population.",
     divisions: [
       { name: "Peshawar", population: 18000, growth: 2.6 },
       { name: "Mardan", population: 9000, growth: 2.3 },
@@ -61,7 +61,7 @@ const regionData = {
     color: "#F59E0B",
     position: [-3, 0, -2],
     scale: 1.3,
-    description: "The largest province by area, with Turkic communities scattered throughout its vast landscape.",
+    description: "The largest province by area, with Turks communities scattered throughout its vast landscape.",
     divisions: [
       { name: "Quetta", population: 8000, growth: 2.4 },
       { name: "Kalat", population: 3000, growth: 1.8 },
@@ -76,7 +76,7 @@ const regionData = {
     color: "#8B5CF6",
     position: [0, 0.5, 0],
     scale: 0.3,
-    description: "The capital city, attracting a diverse mix of people, including a growing Turkic community.",
+    description: "The capital city, attracting a diverse mix of people, including a growing Turks community.",
     divisions: [
       { name: "Islamabad Capital Territory", population: 35000, growth: 3.8 },
     ],
@@ -87,7 +87,7 @@ const regionData = {
     color: "#EC4899",
     position: [1, 0, 2],
     scale: 0.8,
-    description: "A region known for its stunning natural beauty and a small but significant Turkic population.",
+    description: "A region known for its stunning natural beauty and a small but significant Turks population.",
     divisions: [
       { name: "Gilgit", population: 4000, growth: 2.2 },
       { name: "Baltistan", population: 3000, growth: 2.0 },
@@ -100,7 +100,7 @@ const regionData = {
     color: "#06B6D4",
     position: [1.5, 0, 1],
     scale: 0.6,
-    description: "A region with a rich cultural heritage and a small, close-knit Turkic community.",
+    description: "A region with a rich cultural heritage and a small, close-knit Turks community.",
     divisions: [
       { name: "Muzaffarabad", population: 2500, growth: 2.1 },
       { name: "Mirpur", population: 1500, growth: 1.9 },
@@ -314,7 +314,7 @@ function updateRegionDetails(region) {
       
       <div class="bg-white rounded-xl p-3 sm:p-4 shadow-inner">
         <div class="flex items-center justify-between mb-2">
-          <span class="font-medium text-sm sm:text-base">Turkic Population</span>
+          <span class="font-medium text-sm sm:text-base">Turks Population</span>
           <span class="font-bold text-base sm:text-lg">${region.population.toLocaleString()}</span>
         </div>
         <div class="w-full bg-gray-200 rounded-full h-2 sm:h-3">
