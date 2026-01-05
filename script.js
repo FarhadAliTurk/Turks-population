@@ -54,23 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // PDF Download Logic
+    // PDF Download Logic - Google Drive Link
     document.getElementById('download-pdf-btn').addEventListener('click', () => {
-        const element = document.querySelector('main');
-        const opt = {
-            margin:       0.5,
-            filename:     'turks-population-map.pdf',
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2, useCORS: true, logging: true },
-            jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
-        };
-        
-        // Temporarily modify styles for better PDF output
-        const originalGap = element.style.gap;
-        element.style.gap = '1rem';
-        
-        html2pdf().set(opt).from(element).save().then(() => {
-            // Restore styles
-            element.style.gap = originalGap;
-        });
+        // REPLACE THE URL BELOW WITH YOUR ACTUAL GOOGLE DRIVE PDF LINK
+        const googleDriveLink = "https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing";
+        window.open(googleDriveLink, '_blank');
     });
 });
